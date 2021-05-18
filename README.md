@@ -9,14 +9,14 @@ A semaphore is a variable or abstract data type used to control access to a comm
 
 ### Requirements of starve free readers writers problem:
 
-● **Shared data** - like file and database, etc
-● **Semaphores**:
-○ **mutex**: mutual exclusion semaphores for updating *readCount* and *writeCount* variables.
-○**resourceAvailable**: mutual exclusion semaphores for
+1. **Shared data** - like file and database, etc
+2. **Semaphores**:
++ **mutex**: mutual exclusion semaphores for updating *readCount* and *writeCount* variables.
++ **resourceAvailable**: mutual exclusion semaphores for
 checking whether the resource is available or not.
-● Initially,
-○ mutex = 1, resourceAvailable = 1
-○ readCount = 0, writeCount = 0
+3. Initially,
++mutex = 1, resourceAvailable = 1
++readCount = 0, writeCount = 0
 
 ## First readers–writers problem
 
@@ -83,3 +83,11 @@ other processes can enter into reading.
     
     
 
+## Proof of Correctness 
+
+The rwt semaphore ensures that only a single writer can access the critical section at any moment of time thus ensuring mutual exclusion between the writers and also when the first reader try to access the critical section it has to acquire the rwt mutex lock to access the critical section thus ensuring mutual exclusion between the readers and writers.Before accessing the critical section any reader or writer have to first acquire the turn semaphore which uses a FIFO queue for the blocked processes. Thus as the queue uses a FIFO policy, every process has to wait for a finite amount of time before it can access the critical section thus meeting the requirement of bounded waiting.
+
+##References
++ Abraham Silberschatz, Peter B. Galvin, Greg Gagne - Operating System Concepts
++ Wikipedia
++ https://rfc1149.net/blog/2011/01/07/the-third-readers-writers-problem/
